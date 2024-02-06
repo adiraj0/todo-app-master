@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+/* todo-list.component.css */
+.todo-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 30px;
+    height: 500px;
+    width: 500px;
+  }
+  
+  .todo-items {
+    margin-top: 10px;
+  }
+  
+  .selected {
+    background-color: lightblue;
+  }
+  
+  .not-selected {
+    background-color: #f0f0f0;
+  }
+  
+  .square {
+    display: inline-block;
+    width: 70px; /* Set the desired width */
+    height: 70px; /* Set the desired height */
+    text-align: center;
+    line-height: 1.5; /* Adjust line height for better spacing */
+    overflow: hidden; /* Ensure text doesn't overflow */
+    word-wrap: break-word; /* Allow text to break onto the next line */
+    margin: 5px;
+    border: 1px solid #ccc; /* Define square styles */
+    box-sizing: border-box; /* Include padding in overall width and height */
+  }
+  
+  .circle {
+    width: 70px; /* Set the desired width */
+    height: 70px; /* Set the desired height */
+    border-radius: 50%; /* Apply circular shape */
+    text-align: center;
+    line-height: 1.5; /* Adjust line height for better spacing */
+    overflow: hidden; /* Ensure text doesn't overflow */
+    word-wrap: break-word; /* Allow text to break onto the next line */
+    padding: 5px; /* Adjust padding as needed */
+    box-sizing: border-box;
+    margin: 5px; /* Include padding in overall width and height */
+  }
+  
+  
+  
+  

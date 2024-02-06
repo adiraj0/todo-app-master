@@ -2,7 +2,8 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './models/todo-interface';
 import { Store } from '@ngrx/store';
-import { addTodoItem, moveSelectedToDone, moveSelectedToTodo, removeSelectedItems, setSelectedBackgroundColor, toggleTodoSelection } from './stores/todo.action'; 
+import { addTodoItem, moveSelectedToDone, moveSelectedToTodo, removeSelectedItems, setSelectedBackgroundColor, setShape, toggleTodoSelection } from './stores/todo.action'; 
+import { selectShape } from './stores/todo.state';
 
 
 @Injectable({
@@ -47,5 +48,17 @@ export class TodoService {
   setSelectedBackgroundColor(color: string) {
     this.store.dispatch(setSelectedBackgroundColor({ color }));
   }
+  setGlobalShape(shape: 'square' | 'circle') {
+    this.store.dispatch(setShape({ shape }));
+  }
 
+  getGlobalShape(): 'square' | 'circle' {
+    let shape: 'square' | 'circle' = 'square'; // Initialize with a default value
+
+    this.store.select(selectShape).subscribe((globalShape) => {
+      shape = globalShape;
+    });
+
+    return shape;
+  }
 }

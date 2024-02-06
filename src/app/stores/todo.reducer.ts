@@ -62,13 +62,13 @@ export const todoReducer = createReducer(
 
   on(TodoActions.toggleTodoSelection, (state, { todo }) => {
     const updatedItems = state.todoItems.map((item) =>
-      item.id === todo.id ? { ...item, selected: !item.selected } : item
+      item.id === todo.id ? { ...item, selected: !item.selected, style: state.shape } : item
     );
     const updatedSelectedTodoItems = updatedItems.filter(
       (item) => item.selected
     ); // Update selectedItems
     const updatedDoneItems = state.doneItems.map((item) =>
-      item.id === todo.id ? { ...item, selected: !item.selected } : item
+      item.id === todo.id ? { ...item, selected: !item.selected, style: state.shape } : item
     );
     const updatedSelectedDoneItems = updatedDoneItems.filter(
       (item) => item.selected
@@ -93,5 +93,20 @@ export const todoReducer = createReducer(
   on(TodoActions.setSelectedBackgroundColor, (state, { color }) => ({
     ...state,
     selectedBackgroundColor: color,
-  }))
+  })),
+
+  
+    on(TodoActions.setShape, (state, { shape }) => {
+      const updatedTodoItems = state.todoItems.map((item) => ({ ...item, style: shape }));
+      const updatedDoneItems = state.doneItems.map((item) => ({ ...item, style: shape }));
+  
+      return {
+        ...state,
+        shape,
+        todoItems: updatedTodoItems,
+        doneItems: updatedDoneItems,
+      };
+    }),
+
+  
 );

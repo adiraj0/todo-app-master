@@ -5,6 +5,7 @@ export interface Todo {
   id: number;
   text: string;
   selected: boolean;
+  style: 'square' | 'circle';
 }
 
 export interface TodoState {
@@ -12,6 +13,7 @@ export interface TodoState {
   doneItems: Todo[];
   selectedItems: Todo[];
   selectedBackgroundColor: string;
+  shape: "square" | "circle";
 }
 
 export const initialTodoState: TodoState = {
@@ -19,6 +21,7 @@ export const initialTodoState: TodoState = {
   doneItems: [],
   selectedItems: [],
   selectedBackgroundColor: '',
+  shape: "square"
 };
 
 export const selectTodoState = createFeatureSelector<TodoState>('todos');
@@ -26,3 +29,4 @@ export const selectTodoItems = createSelector(selectTodoState, (state) => state.
 export const selectDoneItems = createSelector(selectTodoState, (state) => state.doneItems);
 export const selectSelectedItems = createSelector(selectTodoState, (state) => state.selectedItems);
 export const selectBackgroundColor = createSelector(selectTodoState, (state) => state.selectedBackgroundColor);
+export const selectShape = createSelector(selectTodoState, (state) => state.shape);

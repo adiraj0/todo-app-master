@@ -16,19 +16,13 @@ export class TodoListComponent implements OnInit {
 
   constructor(private store: Store,public todoService : TodoService ) { }
 
-  // addTodo(newTodo:string) {
-  //   if (this.newTodo.trim()) {
-  //     this.todoService.addTodoItem(newTodo); // Pass only the text
-  //     this.newTodo = ''; // Clear the input field
-  //   }
-  // }
-
   addTodo(newTodo:string) {
     if (this.newTodo.trim()) {
       const newTodo: Todo = { 
         id: Date.now(),
         text: this.newTodo,
         selected: false,
+        style: this.todoService.getGlobalShape()
       };
       this.todoService.addTodoItem(newTodo);
       this.newTodo = ''; // Clear the input field

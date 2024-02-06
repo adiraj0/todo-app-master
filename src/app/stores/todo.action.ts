@@ -30,3 +30,7 @@ export const setSelectedBackgroundColor = createAction(
   '[Todo] Set Selected Background Color',
   props<{ color: string }>()
 );
+export const setShape = createAction(
+  '[Todo] Set Shape',
+  props<{ shape: 'square' | 'circle' }>()
+);

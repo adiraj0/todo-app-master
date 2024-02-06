@@ -4,10 +4,12 @@ import { Todo } from '../models/todo-interface';
 import { selectDoneItems } from '../stores/todo.state';
 import { Store } from '@ngrx/store';
 
+
 @Component({
   selector: 'app-done-list',
   templateUrl: './done-list.component.html',
   styleUrls: ['./done-list.component.css']
+
 })
 
 export class DoneListComponent implements OnInit {

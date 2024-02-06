@@ -4,13 +4,13 @@ import { TodoService } from './todo.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(public todoService : TodoService ) { }
+  constructor(public todoService: TodoService) {}
 
   title = 'todo-app';
-  
+
   moveSelectedToDone() {
     this.todoService.moveSelectedToDone();
   }
@@ -31,10 +31,11 @@ export class AppComponent {
   //   }
   // }
   confirmRemove() {
-   
-  
-        this.todoService.removeSelectedItems();
-      }
+    this.todoService.removeSelectedItems();
+  }
 
+  setGlobalShapeAndLog(shape: 'square' | 'circle') {
+    this.todoService.setGlobalShape(shape);
+    console.log('Global Shape set to', shape);
+  }
 }
-

@@ -11,9 +11,12 @@
       (click)="toggleTodoSelection(item)"
     >
       <div
-        class="todo-item-square"
-        [class.selected]="item.selected"
-        [class.not-selected]="!item.selected"
+      [ngClass]="{
+        'square': item.style === 'square',
+        'circle': item.style === 'circle',
+        'selected': item.selected,
+        'not-selected': !item.selected
+      }"
         [ngStyle]="{
           'background-color': item.selected
             ? todoService.setSelectedBackgroundColor
