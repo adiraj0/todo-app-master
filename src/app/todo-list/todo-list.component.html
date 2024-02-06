@@ -1,0 +1,27 @@
+<!-- todo-list.component.html -->
+<div class="todo-container">
+  <input
+    [(ngModel)]="newTodo"
+    (keyup.enter)="addTodo(newTodo)"
+    placeholder="Add Todo"
+  />
+  <div class="todo-items">
+    <div
+      *ngFor="let item of this.todoItems | filter : newTodo"
+      (click)="toggleTodoSelection(item)"
+    >
+      <div
+        class="todo-item-square"
+        [class.selected]="item.selected"
+        [class.not-selected]="!item.selected"
+        [ngStyle]="{
+          'background-color': item.selected
+            ? todoService.setSelectedBackgroundColor
+            : ''
+        }"
+      >
+        {{ item.text }}
+      </div>
+    </div>
+  </div>
+</div>

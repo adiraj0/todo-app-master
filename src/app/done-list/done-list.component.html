@@ -1,0 +1,21 @@
+<div class="todo-container">
+  <div class="done-items">
+    <div
+      *ngFor="let item of this.doneItems"
+      (click)="toggleTodoSelection(item)"
+    >
+      <div
+        class="todo-item-square"
+        [class.selected]="item.selected"
+        [class.not-selected]="!item.selected"
+        [ngStyle]="{
+          'background-color': item.selected
+            ? todoService.setSelectedBackgroundColor
+            : ''
+        }"
+      >
+        {{ item.text }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+/* app.component.css */
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .todo,
+  .done {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  

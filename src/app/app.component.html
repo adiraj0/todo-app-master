@@ -1,0 +1,20 @@
+
+<div class="container">
+  <div class="todo">
+    <app-todo-list></app-todo-list>
+  </div>
+  <div class="buttons">
+    <button (click)="moveSelectedToDone()">Move to Done</button>
+    <button (click)="moveSelectedTodo()">Move to Todo</button>
+    <button (click)="confirmRemove()">Remove Selected</button>
+    <select [(ngModel)]="todoService.setSelectedBackgroundColor">
+      <option value="">None</option>
+      <option value="orange">Orange</option>
+      <option value="green">Green</option>
+    </select>
+  </div>
+  <div class="done">
+    <app-done-list></app-done-list>
+  </div>
+</div>
+<router-outlet></router-outlet>

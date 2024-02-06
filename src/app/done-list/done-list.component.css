@@ -1,0 +1,39 @@
+/* todo-list.component.css */
+.todo-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 30px;
+  height: 500px;
+  width: 500px;
+}
+
+.todo-items {
+  margin-top: 10px;
+}
+
+.selected {
+  background-color: lightblue;
+}
+
+.not-selected {
+  background-color: #f0f0f0;
+}
+
+.square{
+
+}
+
+.circle{
+  
+}
+
+.todo-item-square {
+  display: inline-block;
+  width: 50px; /* Adjust the size as needed */
+  height: 50px; /* Adjust the size as needed */
+  text-align: center;
+  line-height: 50px; /* Vertically center the text */
+  margin: 5px;
+  border: 1px solid #ccc;
+}
+
