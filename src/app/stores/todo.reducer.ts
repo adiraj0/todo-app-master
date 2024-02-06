@@ -1,87 +1,74 @@
 // todo.reducer.ts
 import { createReducer, on } from '@ngrx/store';
 import * as TodoActions from './todo.action';
-import { initialTodoState, TodoState } from './todo.state';
+import { initialTodoState, Todo, TodoState } from './todo.state';
 
 export const todoReducer = createReducer(
   initialTodoState,
 
-  // Add other reducer logic for remaining actions
   on(TodoActions.moveSelectedToDone, (state) => {
-    const updatedSelectedItems = state.selectedItems.map((item) => {
-      let newItem = { ...item, selected: false };
-      return newItem;
-    });
-    const updatedDoneItems = [...state.doneItems, ...updatedSelectedItems];
-
+    const updatedSelectedTodoItems = state.selectedTodoItems.map((item) => ({
+      ...item,
+      selected: false,
+    }));
+    const updatedDoneItems = [...state.doneItems, ...updatedSelectedTodoItems];
     const updatedTodoItems = state.todoItems.filter(
-      (item) => !state.selectedItems.includes(item)
+      (item) => !state.selectedTodoItems.includes(item)
     );
 
     return {
       ...state,
       doneItems: updatedDoneItems,
       todoItems: updatedTodoItems,
-      selectedItems: [],
+      selectedTodoItems: [],
     };
   }),
 
-  // Add other reducer logic for remaining actions
   on(TodoActions.moveSelectedToTodo, (state) => {
-    const updatedSelectedItems = state.selectedItems.map((item) => {
-      let newItem = { ...item, selected: false };
-      return newItem;
-    });
-    const updatedTodoItems = [...state.todoItems, ...updatedSelectedItems];
+    const updatedSelectedDoneItems = state.selectedDoneItems.map((item) => ({
+      ...item,
+      selected: false,
+    }));
+    const updatedTodoItems = [...state.todoItems, ...updatedSelectedDoneItems];
     const updatedDoneItems = state.doneItems.filter(
-      (item) => !state.selectedItems.includes(item)
+      (item) => !state.selectedDoneItems.includes(item)
     );
 
     return {
       ...state,
       todoItems: updatedTodoItems,
       doneItems: updatedDoneItems,
-      selectedItems: [],
-    };
-  }),
-  on(TodoActions.removeSelectedItems, (state, { selectedItems }) => {
-    const updatedDoneItems = state.doneItems.filter(
-      (item) => !state.selectedItems.includes(item)
-    );
-    const updatedTodoItems = state.todoItems.filter(
-      (item) => !state.selectedItems.includes(item)
-    );
-
-    return {
-      ...state,
-      doneItems: updatedDoneItems,
-      todoItems: updatedTodoItems,
-      selectedItems: [],
+      selectedDoneItems: [],
     };
   }),
 
   on(TodoActions.toggleTodoSelection, (state, { todo }) => {
     const updatedItems = state.todoItems.map((item) =>
-      item.id === todo.id ? { ...item, selected: !item.selected, style: state.shape } : item
+      item.id === todo.id
+        ? { ...item, selected: !item.selected, style: state.shape }
+        : item
     );
+
     const updatedSelectedTodoItems = updatedItems.filter(
       (item) => item.selected
-    ); // Update selectedItems
-    const updatedDoneItems = state.doneItems.map((item) =>
-      item.id === todo.id ? { ...item, selected: !item.selected, style: state.shape } : item
     );
+
+    const updatedDoneItems = state.doneItems.map((item) =>
+      item.id === todo.id
+        ? { ...item, selected: !item.selected, style: state.shape }
+        : item
+    );
+
     const updatedSelectedDoneItems = updatedDoneItems.filter(
       (item) => item.selected
     );
-    const updatedSelectedItems = [
-      ...updatedSelectedTodoItems,
-      ...updatedSelectedDoneItems,
-    ];
+
     return {
       ...state,
       todoItems: updatedItems,
       doneItems: updatedDoneItems,
-      selectedItems: updatedSelectedItems,
+      selectedTodoItems: updatedSelectedTodoItems,
+      selectedDoneItems: updatedSelectedDoneItems,
     };
   }),
 
@@ -90,23 +77,43 @@ export const todoReducer = createReducer(
     return { ...state, todoItems: updatedTodoItems };
   }),
 
+  on(TodoActions.removeSelectedItems, (state) => {
+    const updatedTodoItems = state.todoItems.filter(
+      (item) => !state.selectedTodoItems.includes(item)
+    );
+    const updatedDoneItems = state.doneItems.filter(
+      (item) => !state.selectedDoneItems.includes(item)
+    );
+
+    return {
+      ...state,
+      todoItems: updatedTodoItems,
+      doneItems: updatedDoneItems,
+      selectedTodoItems: [],
+      selectedDoneItems: [],
+    };
+  }),
+
   on(TodoActions.setSelectedBackgroundColor, (state, { color }) => ({
     ...state,
     selectedBackgroundColor: color,
   })),
 
-  
-    on(TodoActions.setShape, (state, { shape }) => {
-      const updatedTodoItems = state.todoItems.map((item) => ({ ...item, style: shape }));
-      const updatedDoneItems = state.doneItems.map((item) => ({ ...item, style: shape }));
-  
-      return {
-        ...state,
-        shape,
-        todoItems: updatedTodoItems,
-        doneItems: updatedDoneItems,
-      };
-    }),
+  on(TodoActions.setShape, (state, { shape }) => {
+    const updatedTodoItems = state.todoItems.map((item) => ({
+      ...item,
+      style: shape,
+    }));
+    const updatedDoneItems = state.doneItems.map((item) => ({
+      ...item,
+      style: shape,
+    }));
 
-  
+    return {
+      ...state,
+      shape,
+      todoItems: updatedTodoItems,
+      doneItems: updatedDoneItems,
+    };
+  })
 );

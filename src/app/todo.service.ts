@@ -6,6 +6,7 @@ import { addTodoItem, moveSelectedToDone, moveSelectedToTodo, removeSelectedItem
 import { selectShape } from './stores/todo.state';
 
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,18 +15,19 @@ export class TodoService {
   
   todoItems: Todo[] = [];
   doneItems: Todo[] = [];
-  selectedItems: Todo[] = [];
-  backgroundColor: string = ''; // Store the selected background color  
+  backgroundColor: string = '';
+  selectedTodoItems: Todo[] = [];
+  selectedDoneItems: Todo[] = [];  
   
   constructor(private store: Store) {}
 
   moveSelectedToDone() {
-    this.store.dispatch(moveSelectedToDone({ selectedItems: this.selectedItems }));
+    this.store.dispatch(moveSelectedToDone({ selectedItems: this.selectedTodoItems }));
   }
 
 
   moveSelectedToTodo() {
-    this.store.dispatch(moveSelectedToTodo({ selectedItems: this.selectedItems }));
+    this.store.dispatch(moveSelectedToTodo({ selectedItems: this.selectedDoneItems }));
   }
 
 
@@ -42,9 +44,11 @@ export class TodoService {
 
 
   removeSelectedItems() {
-    this.store.dispatch(removeSelectedItems({ selectedItems: this.selectedItems }));
+    this.store.dispatch(removeSelectedItems({
+      selectedTodoItems: this.selectedTodoItems,
+      selectedDoneItems: this.selectedDoneItems
+    }));
   }
-
   setSelectedBackgroundColor(color: string) {
     this.store.dispatch(setSelectedBackgroundColor({ color }));
   }

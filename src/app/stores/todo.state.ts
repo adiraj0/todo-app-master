@@ -11,7 +11,8 @@ export interface Todo {
 export interface TodoState {
   todoItems: Todo[];
   doneItems: Todo[];
-  selectedItems: Todo[];
+  selectedTodoItems: Todo[];
+  selectedDoneItems: Todo[];
   selectedBackgroundColor: string;
   shape: "square" | "circle";
 }
@@ -19,7 +20,8 @@ export interface TodoState {
 export const initialTodoState: TodoState = {
   todoItems: [],
   doneItems: [],
-  selectedItems: [],
+  selectedTodoItems: [],
+  selectedDoneItems: [],
   selectedBackgroundColor: '',
   shape: "square"
 };
@@ -27,6 +29,5 @@ export const initialTodoState: TodoState = {
 export const selectTodoState = createFeatureSelector<TodoState>('todos');
 export const selectTodoItems = createSelector(selectTodoState, (state) => state.todoItems);
 export const selectDoneItems = createSelector(selectTodoState, (state) => state.doneItems);
-export const selectSelectedItems = createSelector(selectTodoState, (state) => state.selectedItems);
 export const selectBackgroundColor = createSelector(selectTodoState, (state) => state.selectedBackgroundColor);
 export const selectShape = createSelector(selectTodoState, (state) => state.shape);
