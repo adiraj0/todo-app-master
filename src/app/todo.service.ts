@@ -49,15 +49,17 @@ export class TodoService {
       selectedDoneItems: this.selectedDoneItems
     }));
   }
+
   setSelectedBackgroundColor(color: string) {
     this.store.dispatch(setSelectedBackgroundColor({ color }));
   }
+
   setGlobalShape(shape: 'square' | 'circle') {
     this.store.dispatch(setShape({ shape }));
   }
 
   getGlobalShape(): 'square' | 'circle' {
-    let shape: 'square' | 'circle' = 'square'; // Initialize with a default value
+    let shape: 'square' | 'circle' = 'square'; 
 
     this.store.select(selectShape).subscribe((globalShape) => {
       shape = globalShape;
